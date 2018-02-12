@@ -11,11 +11,18 @@ var router = require('./routes.js');
 
 //starting express server
 var app = express();
-module.exports = app;
+var http = require('http');
+var server = http.Server(app)
+var io = require('socket.io').listen(server);
+//exporting io for socket.js
 
 var port = 3000;
 
 app.set('port', port);
+// If we are being run directly, run the server.
+server.listen(app.get('port'));
+console.log('Listening on', app.get('port'));
+
 
 // Logging and parsing
 app.use(morgan('dev'));
@@ -24,8 +31,4 @@ app.use(parser.json());
 // Serve the client files
 app.use(express.static(__dirname + '/../client'));
 
-// If we are being run directly, run the server.
-if (!module.parent) {
-    app.listen(app.get('port'));
-    console.log('Listening on', app.get('port'));
-}
+require('./routes')(app, io);

@@ -1,4 +1,4 @@
-var Mass = function createMass(mass, x, y, direction, velocity, collisionOn, gravExp) {
+var Mass = function createMass(mass, x, y, direction, velocity, collisionOn, gravExp, socket) {
   this.mass = mass;
   this.x = x;
   this.y = y;  
@@ -13,10 +13,21 @@ var Mass = function createMass(mass, x, y, direction, velocity, collisionOn, gra
   this.size = Mass.prototype.setSize.call(this);
 
   this.$resultNode = this.$node.append(this.$visualCoverNode);
-
   Mass.prototype.setPosition.call(this, x, y);
   Mass.prototype.updatePosition.call(this);
 };
+
+Mass.prototype.emit = function(event, socket) {
+  socket.emit(event , {
+    mass: this.mass,
+    x: this.x,
+    y: this.y,
+    direction: this.direction,
+    velocity: this.velocity,
+    collisionOn: this.collisionOn,
+    gravExp: this.gravityExponent
+  });
+}
 
 Mass.prototype.setSize = function() {
   var size = 25 * Math.log(this.mass / 1000);

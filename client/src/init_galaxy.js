@@ -1,4 +1,8 @@
 $(document).ready(function() {
+
+  //initalize socket connection
+  var socket = io.connect();
+
   window.masses = [];
   
   var gravExp = 1.2;
@@ -19,6 +23,7 @@ $(document).ready(function() {
   );
   $('body').append(SUN.$node);
   window.masses.push(SUN);
+  SUN.emit('newMass', socket);
 
   // gaussian function for normal distribution
   var gaussian = function gaussianRand() {
@@ -128,7 +133,8 @@ $(document).ready(function() {
     var upY = event.pageY;
     var velocity = pythag(downX - upX, downY - upY);
     var direction = Math.atan2(downY - upY, downX - upX);
-    
+
+
     var mass = new MassWithTrail(newMass,
     downX,
     downY,
@@ -136,6 +142,7 @@ $(document).ready(function() {
     velocity,
     collisionOn,
     gravExp);
+    mass.emit('newMass', socket);
     
     $('body').append(mass.$resultNode);
     window.masses.push(mass);
