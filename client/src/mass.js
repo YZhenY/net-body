@@ -29,6 +29,13 @@ Mass.prototype.emit = function(event, socket) {
   });
 }
 
+Mass.prototype.remoteUpdatePosition = function (x, y, direction, velocity) {
+  this.x = x;
+  this.y = y;
+  this.direction = direction;
+  this.velocity = velocity;
+}
+
 Mass.prototype.setSize = function() {
   var size = 25 * Math.log(this.mass / 1000);
   if (size < 3) {

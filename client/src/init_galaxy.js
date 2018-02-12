@@ -1,9 +1,20 @@
 $(document).ready(function() {
 
+  window.masses = [];
+
   //initalize socket connection
   var socket = io.connect();
 
-  window.masses = [];
+  window.testController = {
+    lineMasses: function() {
+      socket.emit('setSun');
+    }
+  }
+
+  //handle mass updates
+  socket.on('setSun', function(data) {
+    masses[0].remoteUpdatePosition(data.x, data.y, 0, 0);
+  })
   
   var gravExp = 1.2;
   var collisionOn = true;

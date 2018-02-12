@@ -8,5 +8,9 @@ module.exports = {
             console.log(data);
         });
         socket.on('newMass', model.newMass);
+
+        socket.on('setSun', function (data) {
+            socket.emit('setSun', model.setSun());
+        });
     }
 }
