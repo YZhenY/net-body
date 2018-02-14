@@ -12,9 +12,8 @@ var router = require('./routes.js');
 //starting express server
 var app = express();
 var http = require('http');
-var server = http.Server(app)
+var server = http.Server(app);
 var io = require('socket.io').listen(server);
-//exporting io for socket.js
 
 var port = 3000;
 

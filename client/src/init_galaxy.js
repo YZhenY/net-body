@@ -12,9 +12,15 @@ $(document).ready(function() {
   }
 
   //handle mass updates
+  socket.on('updatePositions', function (data) {
+    console.log(data);
+  })
+
+  //setSun test function
   socket.on('setSun', function(data) {
     masses[0].remoteUpdatePosition(data.x, data.y, 0, 0);
   })
+
   
   var gravExp = 1.2;
   var collisionOn = true;
