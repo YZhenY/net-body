@@ -17,3 +17,7 @@ npm start
 - prevent scrollbars from appearing (overflow: hidden;)
 - collision
 - gravity adjustment
+
+
+## Resources
+- https://github.com/TeamSparkles/service-header
