@@ -13,7 +13,14 @@ var router = require('./routes.js');
 var app = express();
 var http = require('http');
 var server = http.Server(app);
-var io = require('socket.io').listen(server);
+
+//adding io listener
+var io = require('socket.io').listen(server, {
+    serveClient: false,
+    pingInterval: 10000,
+    pingTimeout: 5000
+
+});
 
 var port = 8080;
 

@@ -5,8 +5,15 @@ var instanceGame = require('./initializeServer');
 
 module.exports = {
     newMass: function(data) {
-        console.log('New Mass of ' + data.mass);
-        console.log(instanceGame);
+        console.log('New Mass of ' + data);
+        
+        instanceGame.addNewMass(
+            data.mass,
+            data.x,
+            data.y,
+            data.direction,
+            data.velocity
+        )
         
         //masses.push(data);
     },
