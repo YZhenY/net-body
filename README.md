@@ -8,7 +8,7 @@ npm install
 npm start
 
 ## TODO
-- structure client to take register emitting events from servers
+- structure client to register emitting events from servers
 - randomly assign css color to masses
 - star formation
 - comet

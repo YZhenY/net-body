@@ -13,7 +13,7 @@ var router = require('./routes.js');
 var app = express();
 module.exports = app;
 
-var port = 3000;
+var port = 8080;
 
 app.set('port', port);
 
@@ -26,6 +26,8 @@ app.use(express.static(__dirname + '/../client'));
 
 // If we are being run directly, run the server.
 if (!module.parent) {
-    app.listen(app.get('port'));
+    app.listen(app.get('port'), function(err) {
+        if (err) console.log(err);
+    });
     console.log('Listening on', app.get('port'));
 }
