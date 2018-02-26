@@ -15,7 +15,7 @@ var http = require('http');
 var server = http.Server(app);
 var io = require('socket.io').listen(server);
 
-var port = 3000;
+var port = 8080;
 
 app.set('port', port);
 // If we are being run directly, run the server.

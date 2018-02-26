@@ -9,17 +9,17 @@ $(document).ready(function() {
     lineMasses: function() {
       socket.emit('setSun');
     }
-  }
+  };
 
   //handle mass updates
   socket.on('updatePositions', function (data) {
     console.log(data);
-  })
+  });
 
   //setSun test function
   socket.on('setSun', function(data) {
     masses[0].remoteUpdatePosition(data.x, data.y, 0, 0);
-  })
+  });
 
   
   var gravExp = 1.2;
@@ -31,8 +31,8 @@ $(document).ready(function() {
   //Sun initiation
   var SUN = new Mass(
     1e7,
-    $("body").width() * 0.5,
-    $("body").height() * 0.5,
+    $('body').width() * 0.5,
+    $('body').height() * 0.5,
     0,
     0,
     collisionOn,
@@ -153,12 +153,12 @@ $(document).ready(function() {
 
 
     var mass = new MassWithTrail(newMass,
-    downX,
-    downY,
-    direction,
-    velocity,
-    collisionOn,
-    gravExp);
+      downX,
+      downY,
+      direction,
+      velocity,
+      collisionOn,
+      gravExp);
     mass.emit('newMass', socket);
     
     $('body').append(mass.$resultNode);
