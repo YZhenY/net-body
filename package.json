@@ -9,7 +9,7 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "start": "node ./server/app.js",
+    "start": "nodemon ./server/app.js",
     "start:es6": "babel-node ./server/app.js",
     "test": "mocha server/spec/server-spec.js; RES=$?; kill %1; exit $RES",
     "test:es6": "mocha --compilers js:babel-register server/spec/server-spec.js; RES=$?; kill %1; exit $RES",
@@ -20,7 +20,9 @@
     "express": "^4.10.1",
     "fs": "0.0.1-security",
     "morgan": "^1.4.1",
-    "request": "^2.69.0"
+    "nodemon": "^1.14.12",
+    "request": "^2.69.0",
+    "socket.io": "^2.0.4"
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",

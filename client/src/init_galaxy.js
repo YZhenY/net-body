@@ -1,5 +1,26 @@
 $(document).ready(function() {
+
   window.masses = [];
+
+  //initalize socket connection
+  var socket = io.connect();
+
+  window.testController = {
+    lineMasses: function() {
+      socket.emit('setSun');
+    }
+  };
+
+  //handle mass updates
+  socket.on('updatePositions', function (data) {
+    console.log(data);
+  });
+
+  //setSun test function
+  socket.on('setSun', function(data) {
+    masses[0].remoteUpdatePosition(data.x, data.y, 0, 0);
+  });
+
   
   var gravExp = 1.2;
   var collisionOn = true;
@@ -10,8 +31,8 @@ $(document).ready(function() {
   //Sun initiation
   var SUN = new Mass(
     1e7,
-    $("body").width() * 0.5,
-    $("body").height() * 0.5,
+    $('body').width() * 0.5,
+    $('body').height() * 0.5,
     0,
     0,
     collisionOn,
@@ -19,6 +40,7 @@ $(document).ready(function() {
   );
   $('body').append(SUN.$node);
   window.masses.push(SUN);
+  SUN.emit('newMass', socket);
 
   // gaussian function for normal distribution
   var gaussian = function gaussianRand() {
@@ -128,14 +150,16 @@ $(document).ready(function() {
     var upY = event.pageY;
     var velocity = pythag(downX - upX, downY - upY);
     var direction = Math.atan2(downY - upY, downX - upX);
-    
+
+
     var mass = new MassWithTrail(newMass,
-    downX,
-    downY,
-    direction,
-    velocity,
-    collisionOn,
-    gravExp);
+      downX,
+      downY,
+      direction,
+      velocity,
+      collisionOn,
+      gravExp);
+    mass.emit('newMass', socket);
     
     $('body').append(mass.$resultNode);
     window.masses.push(mass);
