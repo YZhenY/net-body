@@ -36,6 +36,19 @@ class GameInstance{
         this.emitter = cb;
         setInterval(this.updatePositions.bind(this), this.dtime);
     }
+
+    addNewMass (mass, x, y, direction, velocity) {
+        var newMass = new Mass(
+           mass,
+           x,
+           y,
+           direction,
+           velocity,
+            this.collisionOn,
+            this.gravExp
+        );
+        this.masses.push(newMass);
+    }
     
     updatePositions () {
         var massesInGalaxy = this.masses;
